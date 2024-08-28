@@ -54,9 +54,7 @@ source_group(
         TREE ${CMAKE_CURRENT_SOURCE_DIR}
         FILES
         ${headers}
-        ${sources}
-        ${tests}
-        ${misc})
+        ${sources})
 
 #########################################################################################################################
 ### Build options

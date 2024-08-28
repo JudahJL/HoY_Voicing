@@ -1,13 +1,7 @@
-#include "log.h"
 #include "hook.h"
+#include "log.h"
 
-void OnDataLoaded()
-{
-   
-}
-
-void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
-{
+void MessageHandler(SKSE::MessagingInterface::Message* a_msg) {
 	switch (a_msg->type) {
 		case SKSE::MessagingInterface::kDataLoaded:
 			hooks::on_animation_event::install();
@@ -17,16 +11,14 @@ void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
 	}
 }
 
-SKSEPluginLoad(const SKSE::LoadInterface *skse) {
-    SKSE::Init(skse);
+SKSEPluginLoad(const SKSE::LoadInterface* skse) {
+	SKSE::Init(skse);
 	SetupLog();
-
-
-    auto messaging = SKSE::GetMessagingInterface();
-	if (!messaging->RegisterListener("SKSE", MessageHandler)) {
+	RE::BSAnimationGraphEvent;
+	const auto* const messaging{ SKSE::GetMessagingInterface() };
+	if (messaging != nullptr && !messaging->RegisterListener("SKSE", MessageHandler)) {
 		return false;
 	}
 
-	
-    return true;
+	return true;
 }
